@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjay Shukla, PhD — Physicist</title>
+<meta name="theme-color" content="#f4fafd">
+<meta name="description" content="Sanjay Shukla, PhD — Postdoctoral researcher at Eindhoven University of Technology. Statistical physics, turbulence, astrophysical superfluids and multiphase flows.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   1. DESIGN TOKENS  — change colours / fonts here
+   Light "frosted ice" theme, matched to the hero animation
+   ========================================================= */
+:root{
+  --bg:        #f4fafd;
+  --bg-2:      #eaf6fb;
+  --ink:       #0d2233;   /* deep navy text */
+  --body:      #31495b;   /* paragraph text */
+  --muted:     #5a7385;
+  --faint:     #8ba1b0;
+  --accent:    #0b8fb3;   /* glacier cyan */
+  --accent-2:  #6a5ae0;   /* soft indigo  */
+  --accent-soft: rgba(11,143,179,.08);
+  --gold:      #a8741a;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.8);
+  --stroke:       rgba(13,60,90,0.09);
+  --stroke-hi:    rgba(13,60,90,0.2);
+  --edge:         rgba(255,255,255,0.9);   /* bright inner glass edge */
+  --shadow: 0 24px 60px -28px rgba(20,90,130,.28), 0 2px 6px -2px rgba(20,90,130,.06);
+  --radius: 22px;
+  --blur: 20px;
+  --serif: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --sans:  "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --maxw: 1180px;
+}
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.65;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:rgba(11,143,179,.18)}
+
+/* Soft pastel orbs behind the page (gives the glass something to blur) */
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.ambient span{position:absolute;border-radius:50%;filter:blur(100px);opacity:.55}
+.ambient span:nth-child(1){width:44vw;height:44vw;left:-14vw;top:25vh;background:#bfeefc}
+.ambient span:nth-child(2){width:36vw;height:36vw;right:-10vw;top:55vh;background:#e2dcff}
+.ambient span:nth-child(3){width:30vw;height:30vw;left:35vw;top:85vh;background:#d4f7f3}
+
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* Reusable glass surface */
+.glass{
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  backdrop-filter:blur(var(--blur)) saturate(160%);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(160%);
+  box-shadow:0 1px 0 var(--edge) inset, var(--shadow);
+}
+
+.grad-text{
+  background:linear-gradient(100deg,var(--accent) 0%,#3a7fd0 50%,var(--accent-2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* =========================================================
+   3. NAVIGATION
+   ========================================================= */
+.nav{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 32px);max-width:var(--maxw);
+  z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:10px 12px 10px 22px;border-radius:999px;
+  transition:background .4s, box-shadow .4s;
+}
+.nav.scrolled{background:rgba(255,255,255,.72)}
+.brand{font-family:var(--serif);font-size:1.35rem;letter-spacing:.01em;white-space:nowrap}
+.brand em{color:var(--accent);font-style:italic}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{
+  font-size:.86rem;color:var(--muted);padding:8px 14px;border-radius:999px;
+  transition:color .25s, background .25s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);background:rgba(255,255,255,.85);box-shadow:0 0 0 1px var(--stroke) inset}
+.nav-toggle{display:none;background:none;border:0;color:var(--ink);padding:8px 10px;cursor:pointer}
+.nav-toggle svg{width:22px;height:22px}
+
+/* =========================================================
+   4. HERO  (animation lives in .hero-bg)
+   ========================================================= */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:#d6f6fd}
+.hero-bg canvas,.hero-bg video,.hero-bg iframe,.hero-bg img{width:100%;height:100%;object-fit:cover;display:block;border:0}
+.hero::after{ /* soft veil: keeps text readable and fades the animation into the page */
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(244,250,253,.55) 0%, rgba(244,250,253,0) 60%),
+    linear-gradient(to bottom, rgba(244,250,253,0) 70%, var(--bg) 100%);
+}
+.hero .hero-inner{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:center;padding-top:110px;padding-bottom:80px}
+.eyebrow{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+  display:inline-flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.hero h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(3.2rem,8vw,6.4rem);line-height:.95;letter-spacing:-.01em;margin:22px 0 22px;
+}
+.hero h1 em{font-style:italic}
+.hero .lede{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--body);max-width:36ch;font-weight:400}
+.hero .lede strong{color:var(--ink);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;
+  font-size:.92rem;font-weight:500;transition:transform .25s, background .25s, box-shadow .25s;
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 12px 28px -12px rgba(60,90,200,.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(60,90,200,.65)}
+.btn-ghost{border:1px solid var(--stroke-hi);background:rgba(255,255,255,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink)}
+.btn-ghost:hover{background:#fff;transform:translateY(-2px)}
+
+/* Profile card */
+.profile{padding:30px;text-align:left;position:relative;overflow:hidden;background:rgba(255,255,255,.62)}
+.profile::before{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(140deg,rgba(11,143,179,.5),transparent 35%,transparent 65%,rgba(106,90,224,.45));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.avatar{
+  width:180px;height:180px;border-radius:50%;overflow:hidden;flex:none;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 30%,#ffffff,#cfeffa 70%);
+  border:1px solid var(--stroke-hi);
+  font-family:var(--serif);font-size:2.2rem;color:var(--accent);
+}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile-top{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:22px}
+/*.profile-top{display:flex;gap:18px;align-items:center;margin-bottom:22px}*/
+.profile-top h3{font-family:var(--serif);font-weight:400;font-size:1.65rem;line-height:1.1}
+.profile-top p{font-size:.86rem;color:var(--muted)}
+.profile dl{display:grid;gap:14px;font-size:.9rem;margin-bottom:24px}
+.profile dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.profile dd{color:var(--ink)}
+.socials{display:flex;gap:10px;flex-wrap:wrap}
+.socials a{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  border:1px solid var(--stroke);background:rgba(255,255,255,.7);color:var(--muted);
+  transition:color .25s, border-color .25s, transform .25s, background .25s;
+}
+.socials a:hover{color:var(--accent);border-color:rgba(11,143,179,.35);background:#fff;transform:translateY(-2px)}
+.socials svg{width:18px;height:18px}
+
+.scroll-cue{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.scroll-cue span{width:1px;height:42px;background:linear-gradient(var(--accent),transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* =========================================================
+   5. SECTIONS
+   ========================================================= */
+section{padding:120px 0;position:relative}
+.section-head{margin-bottom:56px;max-width:760px}
+.section-head h2{
+  font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.02;margin-top:16px;
+}
+.section-head h2 em{font-style:italic;color:var(--accent)}
+.section-head p{color:var(--muted);margin-top:18px;font-size:1.05rem;max-width:62ch}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:28px}
+.about-text{padding:40px}
+.about-text p{font-size:1.08rem;color:var(--body)}
+.about-text p+p{margin-top:18px}
+.about-text strong{color:var(--ink);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chip{
+  font-size:.8rem;padding:7px 14px;border-radius:999px;border:1px solid var(--stroke);
+  background:rgba(255,255,255,.7);color:var(--body);
+}
+.side-stack{display:grid;gap:28px;align-content:start}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);padding:28px 10px}
+.stat{text-align:center;padding:0 10px}
+.stat+.stat{border-left:1px solid var(--stroke)}
+.stat b{display:block;font-family:var(--serif);font-weight:400;font-size:2.8rem;line-height:1.05}
+.stat span{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.stats-note{grid-column:1/-1;text-align:center;font-size:.72rem;color:var(--faint);margin-top:16px}
+.timeline{padding:30px 32px;list-style:none}
+.timeline li{position:relative;padding-left:24px;padding-bottom:20px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(11,143,179,.15)}
+.timeline li::after{content:"";position:absolute;left:4px;top:22px;bottom:-4px;width:1px;background:var(--stroke-hi)}
+.timeline li:last-child::after{display:none}
+.timeline .when{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--faint);text-transform:uppercase}
+.timeline .what{font-weight:600;font-size:.98rem}
+.timeline .where{font-size:.88rem;color:var(--muted)}
+
+/* Scale journey */
+.scales{padding:44px 40px 40px}
+.scales h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;margin-bottom:6px}
+.scales > p{color:var(--muted);font-size:.95rem;margin-bottom:38px}
+.scale-track{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.scale-track::before{
+  content:"";position:absolute;left:10%;right:10%;top:23px;height:1px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:.5;
+}
+.scale{text-align:center;padding:0 10px;position:relative}
+.scale .dot{
+  width:46px;height:46px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--stroke-hi);font-family:var(--mono);font-size:.7rem;color:var(--accent);
+  position:relative;z-index:1;box-shadow:0 6px 16px -8px rgba(20,90,130,.35);
+}
+.scale .mag{font-family:var(--serif);font-size:1.5rem;line-height:1}
+.scale .mag sup{font-size:.6em}
+.scale .lbl{font-size:.86rem;color:var(--ink);margin-top:6px;font-weight:600}
+.scale .sub{font-size:.78rem;color:var(--muted);margin-top:2px}
+
+/* Research cards */
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:28px}
+.r-card{padding:34px;position:relative;overflow:hidden;transition:transform .35s, box-shadow .35s}
+.r-card:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(--edge) inset,0 30px 70px -28px rgba(20,90,130,.38)}
+.r-card::after{
+  content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-90px;top:-90px;
+  background:radial-gradient(circle,var(--glow,rgba(11,143,179,.16)),transparent 70%);pointer-events:none;
+}
+.r-card .num{font-family:var(--mono);font-size:.72rem;color:var(--faint);letter-spacing:.14em}
+.r-icon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--stroke);background:#fff;margin:18px 0 20px;color:var(--accent);box-shadow:0 8px 18px -10px rgba(20,90,130,.4)}
+.r-icon svg{width:26px;height:26px}
+.r-card h3{font-family:var(--serif);font-weight:400;font-size:1.75rem;line-height:1.12;margin-bottom:12px}
+.r-card p{color:var(--body);font-size:.97rem}
+.r-card ul{list-style:none;margin-top:20px;display:grid;gap:8px}
+.r-card li{font-size:.86rem;color:var(--muted);padding-left:18px;position:relative}
+.r-card li::before{content:"→";position:absolute;left:0;color:var(--accent);font-size:.8rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.tags span{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(11,143,179,.18)}
+
+.toolkit{margin-top:24px;padding:26px 34px;display:flex;flex-wrap:wrap;gap:18px 36px;align-items:center}
+.toolkit h4{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+.toolkit div{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Publications */
+.pub-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px;padding:6px;width:fit-content;max-width:100%;border-radius:999px}
+.pub-filters button{
+  font-family:var(--sans);font-size:.84rem;color:var(--muted);background:none;border:0;cursor:pointer;
+  padding:9px 16px;border-radius:999px;transition:color .25s, background .25s;
+}
+.pub-filters button:hover{color:var(--ink)}
+.pub-filters button.on{background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--stroke-hi) inset,0 4px 12px -6px rgba(20,90,130,.3)}
+.pub-year{display:grid;grid-template-columns:110px 1fr;gap:24px;margin-bottom:22px}
+.pub-year > h3{font-family:var(--serif);font-weight:400;font-size:2.2rem;color:var(--faint);line-height:1;padding-top:22px;position:sticky;top:100px;align-self:start}
+.pub-list{display:grid;gap:14px}
+.pub{padding:22px 26px;transition:background .3s, box-shadow .3s}
+.pub:hover{background:rgba(255,255,255,.85)}
+.pub-title{font-size:1.06rem;font-weight:600;line-height:1.45}
+.pub-authors{font-size:.88rem;color:var(--muted);margin-top:6px}
+.pub-authors b{color:var(--ink);font-weight:700}
+.pub-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:12px}
+.pub-venue{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--body)}
+.pub-links{display:flex;gap:8px;margin-left:auto}
+.pub-links a{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;padding:5px 11px;border-radius:999px;
+  border:1px solid var(--stroke-hi);color:var(--muted);background:rgba(255,255,255,.6);transition:all .25s;
+}
+.pub-links a:hover{color:#fff;background:var(--accent);border-color:var(--accent)}
+.badge{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;padding:3px 9px;border-radius:999px;text-transform:uppercase}
+.badge.preprint{background:rgba(106,90,224,.08);color:var(--accent-2);border:1px solid rgba(106,90,224,.22)}
+.badge.featured{background:rgba(168,116,26,.08);color:var(--gold);border:1px solid rgba(168,116,26,.25)}
+.pub-more{margin-top:34px;text-align:center}
+
+/* News */
+.news-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px}
+.feature{padding:38px;display:flex;flex-direction:column;justify-content:space-between;min-height:340px;position:relative;overflow:hidden;isolation:isolate}
+.feature::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(106,90,224,.16),transparent 50%),
+    radial-gradient(circle at 10% 95%,rgba(11,143,179,.16),transparent 50%);
+}
+.feature .src{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.feature h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.1;margin:16px 0 14px}
+.feature p{color:var(--body)}
+.news-list{padding:12px 30px;list-style:none}
+.news-list li{padding:20px 0;border-bottom:1px solid var(--stroke);display:grid;grid-template-columns:70px 1fr;gap:14px}
+.news-list li:last-child{border-bottom:0}
+.news-list .d{font-family:var(--mono);font-size:.72rem;color:var(--accent);padding-top:3px}
+.news-list .t{font-size:.94rem;color:var(--body)}
+.news-list .t a{border-bottom:1px solid var(--stroke-hi);color:var(--ink)}
+.news-list .t a:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Thesis */
+.thesis{padding:54px;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+.thesis-cover{
+  width:200px;aspect-ratio:3/4.1;border-radius:10px;padding:22px 18px;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(160deg,#d6f4fc 0%,#ffffff 55%,#e6e1ff 100%);
+  border:1px solid var(--stroke-hi);box-shadow:0 30px 60px -24px rgba(20,90,130,.45);
+  transform:rotate(-3deg);transition:transform .4s;
+}
+.thesis:hover .thesis-cover{transform:rotate(0) scale(1.03)}
+.thesis-cover small{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;color:var(--accent);text-transform:uppercase}
+.thesis-cover b{font-family:var(--serif);font-weight:400;font-size:1.12rem;line-height:1.15;color:var(--ink)}
+.thesis-cover span{font-size:.62rem;color:var(--muted)}
+.thesis h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.1;margin:14px 0 18px}
+.thesis blockquote{font-family:var(--serif);font-style:italic;font-size:1.22rem;color:var(--body);border-left:2px solid var(--accent);padding-left:18px;margin-bottom:26px}
+.thesis .meta{color:var(--muted);font-size:.92rem;margin-bottom:24px}
+
+/* Collaborators */
+.collab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.collab{padding:20px 22px;display:flex;gap:14px;align-items:center;transition:transform .3s}
+.collab:hover{transform:translateY(-2px)}
+.collab .ini{width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:1.05rem;background:#fff;color:var(--accent);border:1px solid rgba(11,143,179,.25)}
+.collab b{display:block;font-weight:600;font-size:.95rem}
+.collab span{font-size:.8rem;color:var(--muted);line-height:1.4;display:block}
+
+/* Contact */
+.contact{padding:64px;text-align:center;position:relative;overflow:hidden;isolation:isolate}
+.contact::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 0%,rgba(11,143,179,.14),transparent 60%)}
+.contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,4rem);line-height:1.05;margin:16px 0}
+.contact h2 em{font-style:italic}
+.contact p{color:var(--muted);max-width:52ch;margin:0 auto}
+.contact .mail{display:inline-block;font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.2rem);margin:30px 0 8px;border-bottom:1px solid var(--stroke-hi);transition:color .25s,border-color .25s}
+.contact .mail:hover{color:var(--accent);border-color:var(--accent)}
+.contact address{font-style:normal;color:var(--muted);font-size:.9rem;margin-bottom:30px}
+.contact .socials{justify-content:center}
+
+footer{padding:40px 0 50px;text-align:center;color:var(--muted);font-size:.82rem}
+footer a:hover{color:var(--accent)}
+
+/* =========================================================
+   6. SCROLL-REVEAL
+   ========================================================= */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .scroll-cue span{animation:none}
+}
+
+/* =========================================================
+   7. RESPONSIVE
+   ========================================================= */
+@media (max-width: 980px){
+  .hero .hero-inner{grid-template-columns:1fr;gap:40px}
+  .scroll-cue{display:none}
+  .collab-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid,.news-grid{grid-template-columns:1fr}
+  .research-grid{grid-template-columns:1fr}
+  .thesis{grid-template-columns:1fr;text-align:left;gap:34px;padding:40px}
+  .thesis-cover{margin:0 auto}
+}
+@media (max-width: 860px){
+  .nav-toggle{display:block}
+  .nav-links{
+    position:absolute;top:calc(100% + 10px);left:0;right:0;flex-direction:column;gap:2px;padding:10px;
+    border-radius:20px;background:rgba(255,255,255,.92);border:1px solid var(--stroke);box-shadow:var(--shadow);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .25s, transform .25s;
+  }
+  .nav-links.open{opacity:1;pointer-events:auto;transform:none}
+  .nav-links a{display:block;padding:12px 16px}
+}
+@media (max-width: 700px){
+  .container{padding:0 16px}
+  section{padding:84px 0}
+  .about-text,.r-card,.scales,.feature{padding:28px 22px}
+  .profile{padding:24px}
+  .contact{padding:44px 22px}
+  .collab-grid{grid-template-columns:1fr}
+  .pub-year{grid-template-columns:1fr;gap:10px}
+  .pub-year > h3{position:static;padding-top:0;font-size:1.8rem}
+  .pub-links{margin-left:0}
+  .scale-track{grid-template-columns:1fr;gap:22px}
+  .scale-track::before{left:23px;right:auto;top:10px;bottom:10px;width:1px;height:auto;background:linear-gradient(var(--accent),var(--accent-2))}
+  .scale{display:grid;grid-template-columns:46px 1fr;gap:16px;text-align:left;align-items:center;padding:0}
+  .scale .dot{margin:0}
+  .stats b{font-size:2.2rem}
+  .news-list{padding:6px 22px}
+  .thesis{padding:30px 22px}
+  .hero::after{background:linear-gradient(to bottom, rgba(244,250,253,.35) 0%, rgba(244,250,253,0) 40%, var(--bg) 100%)}
+}
+</style>
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- =====================================================
+     NAVIGATION
+     ===================================================== -->
+<nav class="nav glass" id="nav">
+  <a href="#home" class="brand">Sanjay <em>Shukla</em></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#thesis">Thesis</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<header class="hero" id="home">
+
+  <!-- ▼▼▼ ANIMATION SLOT ▼▼▼
+       Your animation: hero.mp4 (converted from your GIF — 13x smaller, same look).
+       Keep hero.mp4, hero-poster.jpg and hero.gif in the same folder as this file.
+       To use a different animation, just swap the file names below.
+       Anything placed inside .hero-bg is stretched to fill the hero. -->
+  <div class="hero-bg" id="hero-bg">
+    <video autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg" aria-hidden="true">
+      <source src="hero.mp4" type="video/mp4">
+      <img src="hero.gif" alt="">  <!-- fallback for very old browsers -->
+    </video>
+  </div>
+  <!-- ▲▲▲ END ANIMATION SLOT ▲▲▲ -->
+
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow reveal">Theoretical &amp; Computational Physics</span>
+      <h1 class="reveal d1">Sanjay<br><em class="grad-text">Shukla</em>, PhD</h1>
+      <p class="lede reveal d2">
+        I study how fluids flow, swirl and break apart — from <strong>quantum vortices</strong> a nanometre wide,
+        to <strong>superfluids inside neutron stars</strong>, to <strong>droplets and emulsions</strong> in everyday turbulence.
+      </p>
+      <div class="cta reveal d3">
+        <a href="#research" class="btn btn-primary">Explore my research
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#publications" class="btn btn-ghost">Publications</a>
+      </div>
+    </div>
+
+    <aside class="profile glass reveal d2">
+      <div class="profile-top">
+        <!-- Replace "SS" with: <img src="photo.jpg" alt="Sanjay Shukla"> --> 
+        <div class="avatar"><img src="profile.jpeg" alt="Sanjay Shukla"></div>
+        <div>
+          <h3>Postdoctoral Researcher</h3>
+          <p>Eindhoven, The Netherlands</p>
+        </div>
+      </div>
+      <dl>
+        <div><dt>Institution</dt><dd>Eindhoven University of Technology (TU/e)</dd></div>
+        <div><dt>Department</dt><dd>Applied Physics &amp; Science Education</dd></div>
+        <div><dt>Working with</dt><dd>Prof. Federico Toschi</dd></div>
+        <div><dt>PhD</dt><dd>Indian Institute of Science, Bangalore (2024)</dd></div>
+      </dl>
+      <div class="socials">
+        <a href="mailto:s.shukla@tue.nl" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+        <a href="https://scholar.google.com/citations?user=sfmY9f4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-6.8 9.2v4.1C6.8 18.5 9.3 20 12 20s5.2-1.5 6.8-3.7v-4.1L12 16l-6.8-3.8z"/></svg></a>
+        <a href="https://www.linkedin.com/in/sanjay-shukla-PhD-1479aa135/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3V9.5zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21h-4V9.5z"/></svg></a>
+        <a href="https://x.com/shukla_ssanjay" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L1.8 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
+        <a href="https://www.researchgate.net/profile/Sanjay-Shukla-12" target="_blank" rel="noopener" aria-label="ResearchGate" title="ResearchGate">
+          <svg viewBox="0 0 24 24"><text x="12" y="16.5" text-anchor="middle" font-family="Inter,Arial" font-size="11" font-weight="700" fill="currentColor">RG</text></svg></a>
+      </div>
+    </aside>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">SCROLL<span></span></div>
+</header>
+
+<main>
+
+<!-- =====================================================
+     ABOUT
+     ===================================================== -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">01 — About</span>
+      <h2>Fluids across <em>thirty orders</em> of magnitude.</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text glass reveal">
+        <p>
+          I am a postdoctoral researcher in the <strong>Department of Applied Physics and Science Education</strong> at
+          <strong>Eindhoven University of Technology</strong>, working with Prof. Federico Toschi.
+        </p>
+        <p>
+          My PhD at the <strong>Indian Institute of Science, Bangalore</strong> explored superfluid systems across an
+          extraordinary range of scales — from quantum turbulence at the ~1&nbsp;nm scale of a vortex core, to the
+          superfluid interiors of <strong>neutron stars</strong> and self-gravitating condensates proposed as models of
+          <strong>dark matter</strong>.
+        </p>
+        <p>
+          Today I work on <strong>multiphase flows, emulsions and odd viscosity in turbulence</strong>. Across all of it,
+          my tools are statistical physics and large-scale direct numerical simulations on high-performance computers.
+        </p>
+        <div class="chips">
+          <span class="chip">Statistical Physics</span>
+          <span class="chip">Turbulence</span>
+          <span class="chip">Astrophysical Superfluids</span>
+          <span class="chip">Multiphase Flows</span>
+          <span class="chip">Quantum Fluids</span>
+          <span class="chip">HPC &amp; DNS</span>
+        </div>
+      </div>
+
+      <div class="side-stack">
+        <!-- Update these numbers from Google Scholar whenever you like -->
+        <div class="stats glass reveal d1">
+          <div class="stat"><b class="grad-text">10</b><span>Papers</span></div>
+          <div class="stat"><b class="grad-text">48</b><span>Citations</span></div>
+          <div class="stat"><b class="grad-text">3</b><span>h-index</span></div>
+          <div class="stats-note">Google Scholar · October 2026</div>
+        </div>
+
+        <ul class="timeline glass reveal d2">
+          <li>
+            <div class="when">Present</div>
+            <div class="what">Postdoctoral Researcher</div>
+            <div class="where">Eindhoven University of Technology, NL</div>
+          </li>
+          <li>
+            <div class="when">2024</div>
+            <div class="what">PhD in Physics</div>
+            <div class="where">Indian Institute of Science, Bangalore</div>
+          </li>
+          <!-- Add earlier degrees / positions here, e.g.
+          <li><div class="when">20XX</div><div class="what">M.Sc. Physics</div><div class="where">University name</div></li>
+          -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     RESEARCH
+     ===================================================== -->
+<section id="research">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">02 — Research</span>
+      <h2>From quantum vortices <em>to dead stars</em>.</h2>
+      <p>Four connected themes, one methodology: model the physics, simulate it at scale, and extract its statistical laws.</p>
+    </div>
+
+    <!-- Scale journey -->
+    <div class="scales glass reveal">
+      <h3>A journey across scales</h3>
+      <p>The same mathematics of vortices and condensates reappears from the laboratory to the cosmos.</p>
+      <div class="scale-track">
+        <div class="scale"><div class="dot">nm</div><div><div class="mag">10<sup>−9</sup> m</div><div class="lbl">Vortex cores</div><div class="sub">Quantised vortices in He II</div></div></div>
+        <div class="scale"><div class="dot">µm</div><div><div class="mag">10<sup>−6</sup> m</div><div class="lbl">Nanowire probes</div><div class="sub">Capturing single vortices</div></div></div>
+        <div class="scale"><div class="dot">mm</div><div><div class="mag">10<sup>−3</sup> m</div><div class="lbl">Droplets &amp; ligaments</div><div class="sub">Multiphase turbulence</div></div></div>
+        <div class="scale"><div class="dot">km</div><div><div class="mag">10<sup>4</sup> m</div><div class="lbl">Neutron stars</div><div class="sub">Pulsar glitches, magnetars</div></div></div>
+        <div class="scale"><div class="dot">kpc</div><div><div class="mag">10<sup>20</sup> m</div><div class="lbl">Dark-matter haloes</div><div class="sub">Self-gravitating condensates</div></div></div>
+      </div>
+    </div>
+
+    <div class="research-grid">
+      <!-- Theme 1 -->
+      <article class="r-card glass reveal">
+        <span class="num">THEME 01</span>
+        <div class="r-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 12m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0-3 0"/><path d="M12 7.5a4.5 4.5 0 1 1-4.5 4.5"/><path d="M12 3.5a8.5 8.5 0 1 1-8.5 8.5"/></svg>
+        </div>
+        <h3>Quantum turbulence in superfluid helium</h3>
+        <p>
+          Quantised vortices make superfluid turbulence an intrinsically multiscale problem. Using the two-fluid
+          Hall–Vinen–Bekharevich–Khalatnikov (HVBK) model and the Gross–Pitaevskii equation, I study its statistical
+          properties, how inertial particles move in coflow and counterflow, and how nanomechanical devices capture
+          and release single vortices.
+        </p>
+        <ul>
+          <li>Statistical properties of He II turbulence (Phys. Rev. E, 2023)</li>
+          <li>Inertial particles in superfluid turbulence (Phys. Fluids, 2023)</li>
+          <li>Capture &amp; release of quantum vortices (Phys. Rev. B, 2025)</li>
+        </ul>
+        <div class="tags"><span>HVBK</span><span>Gross–Pitaevskii</span><span>He II</span></div>
+      </article>
+
+      <!-- Theme 2 -->
+      <article class="r-card glass reveal d1" style="--glow:rgba(106,90,224,.14)">
+        <span class="num">THEME 02</span>
+        <div class="r-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v5M12 17v5"/><ellipse cx="12" cy="12" rx="9.5" ry="3.6" transform="rotate(-25 12 12)"/></svg>
+        </div>
+        <h3>Neutron stars, pulsar glitches &amp; magnetars</h3>
+        <p>
+          Neutron-star cores may host a neutron superfluid coexisting with a proton superconductor. I develop minimal
+          Gross–Pitaevskii–Poisson models with a crust potential to explain pulsar glitches through vortex–flux-tube
+          interactions, and to follow magnetic-field evolution and gravitational-wave emission in magnetars.
+        </p>
+        <ul>
+          <li>Minimal model for pulsar glitches (Phys. Rev. D, 2024) — <em>featured in New Scientist</em></li>
+          <li>Superfluid–superconducting magnetars (arXiv, 2025)</li>
+        </ul>
+        <div class="tags"><span>GPPE</span><span>Vortex pinning</span><span>Gravitational waves</span></div>
+      </article>
+
+      <!-- Theme 3 -->
+      <article class="r-card glass reveal" style="--glow:rgba(58,127,208,.14)">
+        <span class="num">THEME 03</span>
+        <div class="r-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="5.5" stroke-dasharray="2 2"/><circle cx="12" cy="12" r="9.5" stroke-dasharray="1 3"/></svg>
+        </div>
+        <h3>Self-gravitating condensates &amp; dark matter</h3>
+        <p>
+          Bose–Einstein condensation at cosmic scales offers a candidate description of dark-matter haloes. With
+          large direct numerical simulations of the 3D Gross–Pitaevskii–Poisson equation I study gravity- and
+          temperature-driven phase transitions, turbulence and the emergence of large-scale structures in bosonic and
+          axionic condensates.
+        </p>
+        <ul>
+          <li>Phase transitions in collapsed axionic condensates (Phys. Rev. D, 2024)</li>
+          <li>Turbulence &amp; large-scale structures (Phys. Rev. Fluids, 2025)</li>
+          <li>The Gross–Pitaevskii–Poisson framework (Phil. Trans. R. Soc. A, 2026)</li>
+        </ul>
+        <div class="tags"><span>Axions</span><span>BEC dark matter</span><span>3D DNS</span></div>
+      </article>
+
+      <!-- Theme 4 -->
+      <article class="r-card glass reveal d1" style="--glow:rgba(20,180,160,.14)">
+        <span class="num">THEME 04 · CURRENT</span>
+        <div class="r-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2.5c3 4 5.5 7 5.5 10a5.5 5.5 0 0 1-11 0c0-3 2.5-6 5.5-10z"/><circle cx="12" cy="13" r="1.6"/><circle cx="5" cy="20" r="1.2"/><circle cx="19.5" cy="19" r="0.9"/></svg>
+        </div>
+        <h3>Multiphase flows, emulsions &amp; odd viscosity</h3>
+        <p>
+          At TU/e I study classical turbulence in complex fluids: how droplets and ligaments deform and break up,
+          how particles change that breakup, how emulsions form, and how odd (non-dissipative) viscosity alters the
+          turbulent cascade.
+        </p>
+        <ul>
+          <li>Self-similar breakup of a liquid ligament with a solid particle (arXiv, 2026)</li>
+          <li>Odd viscosity in turbulence — ongoing</li>
+        </ul>
+        <div class="tags"><span>Emulsions</span><span>Breakup</span><span>Odd viscosity</span></div>
+      </article>
+    </div>
+
+    <div class="toolkit glass reveal">
+      <h4>Toolkit</h4>
+      <div>
+        <span class="chip">Direct Numerical Simulation</span>
+        <span class="chip">Pseudo-spectral methods</span>
+        <span class="chip">MPI</span>
+        <span class="chip">OpenMP</span>
+        <span class="chip">High-performance computing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     PUBLICATIONS  (edit the list in the <script> at the bottom)
+     ===================================================== -->
+<section id="publications">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">03 — Publications</span>
+      <h2>Selected <em>papers</em>.</h2>
+    </div>
+
+    <div class="pub-filters glass reveal" id="pubFilters">
+      <button class="on" data-filter="all">All</button>
+      <button data-filter="quantum">Quantum turbulence</button>
+      <button data-filter="neutron">Neutron stars</button>
+      <button data-filter="gravity">Self-gravitating</button>
+      <button data-filter="multiphase">Multiphase</button>
+    </div>
+
+    <div id="pubContainer"></div>
+
+    <div class="pub-more reveal">
+      <a class="btn btn-ghost" href="https://scholar.google.com/citations?user=sfmY9f4AAAAJ&hl=en" target="_blank" rel="noopener">
+        Full list on Google Scholar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     NEWS & MEDIA
+     ===================================================== -->
+<section id="news">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">04 — News &amp; Media</span>
+      <h2>Recent <em>highlights</em>.</h2>
+    </div>
+
+    <div class="news-grid">
+      <a class="feature glass reveal" href="https://www.newscientist.com/article/2433690-glitching-radio-waves-from-dead-stars-explained-by-swirling-superfluid/" target="_blank" rel="noopener">
+        <div>
+          <span class="src">In the press · New Scientist</span>
+          <h3>“Glitching radio waves from dead stars explained by swirling superfluid”</h3>
+          <p>An interview on our minimal model of pulsar glitches, in which neutron-superfluid vortices and
+            proton-superconductor flux tubes explain the sudden spin-ups of pulsars.</p>
+        </div>
+        <span class="btn btn-ghost" style="margin-top:28px;width:fit-content">Read the article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </span>
+      </a>
+
+      <!-- Add new items at the top of this list -->
+      <ul class="news-list glass reveal d1">
+        <li><span class="d">2026</span><span class="t">New preprint: <a href="https://arxiv.org/abs/2605.19774" target="_blank" rel="noopener">self-similar breakup of a liquid ligament with a solid particle</a>, with F. Toschi.</span></li>
+        <li><span class="d">2026</span><span class="t">Review of the Gross–Pitaevskii–Poisson framework published in <em>Phil. Trans. R. Soc. A</em>.</span></li>
+        <li><span class="d">2025</span><span class="t">Turbulence in self-gravitating superfluids published in <em>Physical Review Fluids</em>.</span></li>
+        <li><span class="d">2025</span><span class="t">Capture and release of quantum vortices published as a Letter in <em>Physical Review B</em>.</span></li>
+        <li><span class="d">2024</span><span class="t">PhD awarded by the Indian Institute of Science, Bangalore.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     THESIS
+     ===================================================== -->
+<section id="thesis">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">05 — Doctoral Thesis</span>
+    </div>
+    <div class="thesis glass reveal">
+      <div class="thesis-cover" aria-hidden="true">
+        <small>PhD Thesis · 2024</small>
+        <b>Studies of Models of Superfluids from Nanometres to Astrophysical Scales</b>
+        <span>Sanjay Shukla<br>Indian Institute of Science</span>
+      </div>
+      <div>
+        <span class="eyebrow">Indian Institute of Science · 2024</span>
+        <h3>Studies of Models of Superfluids from Nanometres to Astrophysical Scales</h3>
+        <blockquote>“Superfluids constitute a fascinating class of fluids characterised by their vanishing molecular viscosity.”</blockquote>
+        <p class="meta">The thesis connects laboratory superfluid helium turbulence, quantum-vortex dynamics, neutron-star
+          interiors and self-gravitating condensates through a common family of models.</p>
+        <!-- Replace href with a direct PDF link (e.g. "thesis.pdf") if you host it yourself -->
+        <a class="btn btn-ghost" href="https://sites.google.com/view/sanjay-shukla-physics/thesis" target="_blank" rel="noopener">
+          Read the thesis
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     COLLABORATORS
+     ===================================================== -->
+<section id="collaborators" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">06 — Collaborators</span>
+      <h2>Working <em>together</em>.</h2>
+    </div>
+    <div class="collab-grid">
+      <div class="collab glass reveal"><div class="ini">RP</div><div><b>Rahul Pandit</b><span>Indian Institute of Science, Bangalore</span></div></div>
+      <div class="collab glass reveal d1"><div class="ini">FT</div><div><b>Federico Toschi</b><span>Eindhoven University of Technology</span></div></div>
+      <div class="collab glass reveal d2"><div class="ini">MB</div><div><b>Marc E. Brachet</b><span>CNRS, LPENS, Paris</span></div></div>
+      <div class="collab glass reveal"><div class="ini">GK</div><div><b>Giorgio Krstulovic</b><span>Université Côte d’Azur, Nice</span></div></div>
+      <div class="collab glass reveal d1"><div class="ini">AV</div><div><b>Akhilesh K. Verma</b><span>University of Miami</span></div></div>
+      <div class="collab glass reveal d2"><div class="ini">VS</div><div><b>Vishwanath Shukla</b><span>IIT Kharagpur</span></div></div>
+      <div class="collab glass reveal"><div class="ini">AB</div><div><b>Akshay Bhatnagar</b><span>IIT Roorkee</span></div></div>
+      <div class="collab glass reveal d1"><div class="ini">PM</div><div><b>Pankaj K. Mishra</b><span>IIT Guwahati</span></div></div>
+      <div class="collab glass reveal d2"><div class="ini">PM</div><div><b>P. Muruganandam</b><span>Bharathidasan University</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     CONTACT
+     ===================================================== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact glass reveal">
+      <span class="eyebrow">07 — Contact</span>
+      <h2>Let’s talk <em class="grad-text">physics</em>.</h2>
+      <p>I’m always happy to discuss turbulence, superfluids, collaborations or new ideas.</p>
+      <a class="mail" href="mailto:s.shukla@tue.nl">s.shukla@tue.nl</a>
+      <address>Department of Applied Physics &amp; Science Education<br>Eindhoven University of Technology · Eindhoven, The Netherlands</address>
+      <div class="socials">
+        <a href="https://scholar.google.com/citations?user=sfmY9f4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-6.8 9.2v4.1C6.8 18.5 9.3 20 12 20s5.2-1.5 6.8-3.7v-4.1L12 16l-6.8-3.8z"/></svg></a>
+        <a href="https://www.linkedin.com/in/sanjay-shukla-PhD-1479aa135/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3V9.5zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21h-4V9.5z"/></svg></a>
+        <a href="https://x.com/shukla_ssanjay" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L1.8 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
+        <a href="https://www.researchgate.net/profile/Sanjay-Shukla-12" target="_blank" rel="noopener" aria-label="ResearchGate" title="ResearchGate">
+          <svg viewBox="0 0 24 24"><text x="12" y="16.5" text-anchor="middle" font-family="Inter,Arial" font-size="11" font-weight="700" fill="currentColor">RG</text></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">© <span id="year">2026</span> Sanjay Shukla · Eindhoven, The Netherlands · <a href="#home">Back to top ↑</a></div>
+</footer>
+
+<script>
+/* =========================================================
+   PUBLICATIONS — EDIT HERE
+   theme: "quantum" | "neutron" | "gravity" | "multiphase"
+   Leave arxiv / doi empty ("") if not available.
+   Set preprint:true for arXiv-only papers, featured:true to add a badge.
+   ========================================================= */
+const ME = "S. Shukla";   // your name as it appears in author lists (gets bolded)
+
+const PUBLICATIONS = [
+  { year: 2026, theme: "multiphase", preprint: true,
+    title: "Self-similar breakup of a liquid ligament with a solid particle",
+    authors: "S. Shukla, F. Toschi",
+    venue: "arXiv preprint",
+    arxiv: "2605.19774", doi: "" },
+
+  { year: 2026, theme: "gravity",
+    title: "Vortex retention mediated turbulent transitions in self-gravitating bosonic and axionic condensates",
+    authors: "A. Sivakumar, S. Shukla, R. Pandit, P. K. Mishra, P. Muruganandam",
+    venue: "Physical Review D 113, 123516",
+    arxiv: "", doi: "10.1103/PhysRevD.113.123516" },
+
+  { year: 2026, theme: "gravity",
+    title: "Self-gravitating superfluids: the Gross–Pitaevskii–Poisson framework",
+    authors: "S. Shukla, M. E. Brachet, R. Pandit",
+    venue: "Philosophical Transactions of the Royal Society A",
+    arxiv: "", doi: "" },
+
+  { year: 2025, theme: "gravity",
+    title: "Turbulence and large-scale structures in self-gravitating superfluids",
+    authors: "S. Shukla",
+    venue: "Physical Review Fluids 10, 114601",
+    arxiv: "2502.20006", doi: "10.1103/PhysRevFluids.10.114601" },
+
+  { year: 2025, theme: "neutron", preprint: true,
+    title: "Dynamics of superfluid-superconducting magnetars: magnetic field evolution and gravitational waves",
+    authors: "S. Shukla, R. Pandit",
+    venue: "arXiv preprint",
+    arxiv: "2503.12064", doi: "" },
+
+  { year: 2025, theme: "quantum",
+    title: "Capture and release of quantum vortices using mechanical devices in low-temperature superfluids",
+    authors: "S. Shukla, G. Krstulovic, R. Pandit",
+    venue: "Physical Review B 111, L100504",
+    arxiv: "2410.06650", doi: "10.1103/PhysRevB.111.L100504" },
+
+  { year: 2024, theme: "neutron", featured: true,
+    title: "Neutron-superfluid vortices and proton-superconductor flux tubes: development of a minimal model for pulsar glitches",
+    authors: "S. Shukla, M. E. Brachet, R. Pandit",
+    venue: "Physical Review D 110, 083002",
+    arxiv: "2405.12127", doi: "10.1103/PhysRevD.110.083002" },
+
+  { year: 2024, theme: "gravity",
+    title: "Gravity- and temperature-driven phase transitions in a model for collapsed axionic condensates",
+    authors: "S. Shukla, A. K. Verma, M. E. Brachet, R. Pandit",
+    venue: "Physical Review D 109, 063009",
+    arxiv: "2311.01769", doi: "10.1103/PhysRevD.109.063009" },
+
+  { year: 2023, theme: "quantum",
+    title: "Statistical properties of superfluid turbulence in ⁴He from the Hall–Vinen–Bekharevich–Khalatnikov model",
+    authors: "A. K. Verma, S. Shukla, V. Shukla, A. Basu, R. Pandit",
+    venue: "Physical Review E 108, 045103",
+    arxiv: "1905.01507", doi: "10.1103/PhysRevE.108.045103" },
+
+  { year: 2023, theme: "quantum",
+    title: "Inertial particles in superfluid turbulence: coflow and counterflow",
+    authors: "S. Shukla, A. K. Verma, V. Shukla, A. Bhatnagar, R. Pandit",
+    venue: "Physics of Fluids 35 (1)",
+    arxiv: "2110.09801", doi: "" },
+];
+
+/* ---------- render publications ---------- */
+(function(){
+  const box = document.getElementById("pubContainer");
+  const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+  function render(filter){
+    const list = PUBLICATIONS.filter(p => filter === "all" || p.theme === filter);
+    const years = [...new Set(list.map(p => p.year))].sort((a,b) => b - a);
+    box.innerHTML = years.map(y => `
+      <div class="pub-year">
+        <h3>${y}</h3>
+        <div class="pub-list">
+          ${list.filter(p => p.year === y).map(p => {
+            const authors = esc(p.authors).replace(ME, `<b>${ME}</b>`);
+            const links = [];
+            if (p.doi)   links.push(`<a href="https://doi.org/${p.doi}" target="_blank" rel="noopener">JOURNAL</a>`);
+            if (p.arxiv) links.push(`<a href="https://arxiv.org/abs/${p.arxiv}" target="_blank" rel="noopener">arXiv</a>`);
+            if (!p.doi && !p.arxiv) links.push(`<a href="https://scholar.google.com/scholar?q=${encodeURIComponent(p.title)}" target="_blank" rel="noopener">FIND</a>`);
+            return `
+              <article class="pub glass">
+                <div class="pub-title">${esc(p.title)}</div>
+                <div class="pub-authors">${authors}</div>
+                <div class="pub-meta">
+                  <span class="pub-venue">${esc(p.venue)}</span>
+                  ${p.preprint ? '<span class="badge preprint">Preprint</span>' : ''}
+                  ${p.featured ? '<span class="badge featured">In New Scientist</span>' : ''}
+                  <span class="pub-links">${links.join("")}</span>
+                </div>
+              </article>`;
+          }).join("")}
+        </div>
+      </div>`).join("");
+  }
+  render("all");
+
+  document.getElementById("pubFilters").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    document.querySelectorAll("#pubFilters button").forEach(x => x.classList.toggle("on", x === b));
+    render(b.dataset.filter);
+  });
+})();
+
+/* ---------- nav: scrolled state, mobile menu, active link ---------- */
+(function(){
+  const nav = document.getElementById("nav");
+  const links = document.getElementById("navLinks");
+  document.getElementById("navToggle").addEventListener("click", () => links.classList.toggle("open"));
+  links.addEventListener("click", e => { if (e.target.tagName === "A") links.classList.remove("open"); });
+  addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 40), {passive:true});
+
+  const anchors = [...links.querySelectorAll("a")];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) anchors.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
+    });
+  }, {rootMargin: "-45% 0px -50% 0px"});
+  document.querySelectorAll("main section[id]").forEach(s => io.observe(s));
+})();
+
+/* ---------- scroll reveal ---------- */
+(function(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+  }, {threshold: .12});
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+})();
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+</script>
+</body>
+</html>
