@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhD thesis — Sanjay Shukla</title>
+<meta name="theme-color" content="#f4fafd">
+<meta name="description" content="Studies of Models of Superfluids from Nanometres to Astrophysical Scales — PhD thesis of Sanjay Shukla, Indian Institute of Science, Bangalore (2024).">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* Same colours and fonts as the main page */
+:root{
+  --bg:#f4fafd; --ink:#0d2233; --body:#2c4354; --muted:#5f7686;
+  --line:rgba(13,60,90,.12); --accent:#0a7fa1;
+  --shadow:0 24px 60px -30px rgba(20,90,130,.35);
+  --head:"Instrument Serif",Georgia,serif; --text:"Source Serif 4",Georgia,serif;
+  --ui:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --maxw:900px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--text);font-size:18px;line-height:1.7;color:var(--body);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(10,127,161,.3);transition:border-color .2s,color .2s}
+a:hover{border-color:var(--accent)}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--head);font-weight:400;color:var(--ink);line-height:1.15}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.ambient span{position:absolute;border-radius:50%;filter:blur(110px);opacity:.45}
+.ambient span:nth-child(1){width:40vw;height:40vw;left:-14vw;top:10vh;background:#c4f0fc}
+.ambient span:nth-child(2){width:34vw;height:34vw;right:-12vw;top:50vh;background:#e4defd}
+
+/* top bar (same style as the main page) */
+.nav{position:sticky;top:0;z-index:10;height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;
+  background:rgba(226,243,250,.6);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid rgba(13,60,90,.08)}
+.nav .brand{font-family:var(--head);font-size:1.6rem;color:var(--ink);border:0;white-space:nowrap}
+.nav .back{font-family:var(--ui);font-size:.95rem;color:var(--ink);border:0;padding:10px 18px;border-radius:9px;background:rgba(13,60,90,.07);white-space:nowrap}
+.nav .back:hover{background:rgba(13,60,90,.14)}
+
+/* header */
+.head{display:grid;grid-template-columns:240px 1fr;gap:52px;align-items:center;padding:80px 0 70px}
+.cover{border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 26px 50px -24px rgba(20,90,130,.55);transform:rotate(-2deg)}
+.label{font-family:var(--ui);font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.head h1{font-size:clamp(2.2rem,4.6vw,3.4rem);font-style:italic;margin:10px 0 14px}
+.head .where{font-family:var(--ui);font-size:.92rem;color:var(--muted)}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{font-family:var(--ui);font-size:.92rem;font-weight:500;border:0;padding:11px 18px;border-radius:9px;background:rgba(13,60,90,.07);color:var(--ink)}
+.btn:hover{background:rgba(13,60,90,.14)}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{background:#086d8a}
+
+/* sections */
+section{padding:48px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.9rem,3.4vw,2.5rem);margin-bottom:18px}
+section p{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+section p+p{margin-top:1em}
+blockquote{border-left:2px solid var(--accent);padding-left:18px;font-style:italic;margin-bottom:20px}
+.chapters{list-style:none;counter-reset:ch}
+.chapters li{counter-increment:ch;display:grid;grid-template-columns:44px 1fr;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.chapters li::before{content:counter(ch);font-family:var(--head);font-size:1.6rem;color:var(--accent);line-height:1.1}
+.chapters b{color:var(--ink);font-weight:600}
+.pubs{list-style:none}
+.pubs li{padding:6px 0;font-size:.98rem}
+.pubs .v{color:var(--muted)}
+.cite{font-family:var(--ui);font-size:.88rem;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:12px;padding:16px 18px;color:var(--ink)}
+
+/* dashed boxes mark text you still need to write — delete the class="todo" once filled in */
+.todo{border:1.5px dashed rgba(10,127,161,.35);border-radius:12px;padding:16px 18px;color:var(--muted);font-style:italic;background:rgba(255,255,255,.5)}
+
+footer{padding:40px 0 60px;font-family:var(--ui);font-size:.8rem;color:var(--muted)}
+footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:24px}
+
+@media (max-width:700px){
+  body{font-size:17px}
+  .container{padding:0 18px}
+  .nav{padding:0 18px;height:68px}
+  .head{grid-template-columns:1fr;gap:34px;padding:50px 0}
+  .cover{max-width:200px}
+}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><span></span><span></span></div>
+
+<nav class="nav">
+  <a class="brand" href="index.html">Sanjay Shukla</a>
+  <a class="back" href="index.html">← Back to main page</a>
+</nav>
+
+<main class="container">
+
+  <!-- ================= TITLE ================= -->
+  <header class="head">
+    <img class="cover" src="thesis_cover.jpeg" alt="Cover of my PhD thesis">
+    <div>
+      <span class="label">PhD thesis</span>
+      <h1>Studies of Models of Superfluids from Nanometres to Astrophysical Scales</h1>
+      <p class="where">Sanjay Shukla · Indian Institute of Science, Bangalore · 2024</p>
+      <div class="buttons">
+        <!-- Put the PDF in the website folder as thesis.pdf (or change the file name) -->
+        <a class="btn primary" href="thesis.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <a class="btn" href="index.html#research">See my research</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ABSTRACT ================= -->
+  <section>
+    <h2>Abstract</h2>
+    <blockquote>“Superfluids constitute a fascinating class of fluids characterised by their vanishing molecular viscosity.”</blockquote>
+    <p class="todo">Add your abstract here.</p>
+  </section>
+
+  <!-- ================= CHAPTERS ================= -->
+  <section>
+    <h2>Thesis outline</h2>
+    <!-- Edit the chapter titles and one-line descriptions; add or remove <li> lines as needed -->
+    <ol class="chapters">
+      <li><div><b>Introduction</b><br>One line about this chapter.</div></li>
+      <li><div><b>Chapter title</b><br>One line about this chapter.</div></li>
+      <li><div><b>Chapter title</b><br>One line about this chapter.</div></li>
+      <li><div><b>Chapter title</b><br>One line about this chapter.</div></li>
+      <li><div><b>Conclusions and outlook</b><br>One line about this chapter.</div></li>
+    </ol>
+  </section>
+
+  <!-- ================= PAPERS ================= -->
+  <section>
+    <h2>Related publications</h2>
+    <!-- Keep only the papers that are part of the thesis -->
+    <ul class="pubs">
+      <li><a href="https://arxiv.org/abs/1905.01507" target="_blank" rel="noopener">Statistical properties of superfluid turbulence in ⁴He</a> <span class="v">— Physical Review E (2023)</span></li>
+      <li><a href="https://arxiv.org/abs/2110.09801" target="_blank" rel="noopener">Inertial particles in superfluid turbulence: coflow and counterflow</a> <span class="v">— Physics of Fluids (2023)</span></li>
+      <li><a href="https://arxiv.org/abs/2311.01769" target="_blank" rel="noopener">Gravity- and temperature-driven phase transitions in a model for collapsed axionic condensates</a> <span class="v">— Physical Review D (2024)</span></li>
+      <li><a href="https://arxiv.org/abs/2405.12127" target="_blank" rel="noopener">Neutron-superfluid vortices and proton-superconductor flux tubes: a minimal model for pulsar glitches</a> <span class="v">— Physical Review D (2024)</span></li>
+      <li><a href="https://arxiv.org/abs/2410.06650" target="_blank" rel="noopener">Capture and release of quantum vortices using mechanical devices in low-temperature superfluids</a> <span class="v">— Physical Review B (2025)</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= CITE ================= -->
+  <section>
+    <h2>How to cite</h2>
+    <p class="cite">S. Shukla, <i>Studies of Models of Superfluids from Nanometres to Astrophysical Scales</i>,
+      PhD thesis, Indian Institute of Science, Bangalore (2024).</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container"><div class="foot">
+    <span>© 2026 Sanjay Shukla</span>
+    <a href="index.html">Back to main page</a>
+  </div></div>
+</footer>
+</body>
+</html>

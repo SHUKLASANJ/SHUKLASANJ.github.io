@@ -96,6 +96,8 @@ em{font-style:italic}
 .card h1{font-size:2.7rem;margin-bottom:6px}
 .card .role{font-family:var(--ui);font-size:.95rem;color:var(--ink);font-weight:500}
 .card .place{font-family:var(--ui);font-size:.88rem;color:var(--muted);line-height:1.55;margin-top:4px}
+.card .interests{font-family:var(--ui);font-size:.86rem;color:var(--body);line-height:1.55;margin:14px auto 0;max-width:42ch}
+.card .interests span{font-weight:600;color:var(--ink)}
 .card hr{border:0;border-top:1px solid var(--line);margin:22px 0 18px}
 /* glassy social buttons — each glows in its own brand colour on hover */
 .socials{display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
@@ -156,6 +158,18 @@ section h2{font-size:clamp(2.4rem,4.6vw,3.4rem);margin-bottom:28px}
 .facts li{padding:16px 0;border-bottom:1px solid var(--line)}
 .facts .when{font-family:var(--ui);font-size:.78rem;color:var(--muted);display:block;margin-bottom:2px}
 .facts b{font-weight:600;color:var(--ink)}
+.facts .when{font-weight:500;letter-spacing:.02em}
+
+/* Research: intro, directions */
+.tagline{font-family:var(--head);font-style:italic;font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.3;color:var(--ink);max-width:34ch;margin-bottom:28px}
+.intro p+p{margin-top:1em}
+.subhead{font-family:var(--ui);font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:8px 0 14px}
+.directions{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;margin-bottom:48px;border-top:1px solid var(--line)}
+.directions li{border-bottom:1px solid var(--line)}
+.directions a{display:flex;align-items:baseline;gap:16px;padding:16px 0;border:0;color:var(--ink);font-size:1.05rem;transition:color .2s}
+.directions a:hover{color:var(--accent)}
+.directions .n{font-family:var(--head);font-size:1.7rem;color:var(--accent);line-height:1;min-width:1.2ch}
+.span-note{max-width:62ch;margin-bottom:40px}
 
 /* Research: scale strip */
 .scales{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:90px}
@@ -172,6 +186,12 @@ section h2{font-size:clamp(2.4rem,4.6vw,3.4rem);margin-bottom:28px}
 .theme h3{font-size:clamp(1.9rem,3vw,2.5rem);margin-bottom:16px}
 .theme .now{font-family:var(--ui);font-size:.8rem;color:var(--accent);font-weight:500;margin-bottom:10px;display:block}
 .theme p{margin-bottom:18px}
+.theme .now.phd{color:var(--muted)}
+.theme .topics{margin:4px 0 18px}
+.theme .topics ul{list-style:none;font-size:.95rem;color:var(--body)}
+.theme .topics li{position:relative;padding:2px 0 2px 16px}
+.theme .topics li::before{content:"";position:absolute;left:2px;top:.8em;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.7}
+.theme .topics span,.theme .papers span{font-family:var(--ui);font-size:.78rem;font-weight:600;color:var(--ink);display:block;margin-bottom:4px}
 .theme .papers{font-size:.95rem;color:var(--muted)}
 .theme .papers span{font-family:var(--ui);font-size:.78rem;font-weight:500;color:var(--ink);display:block;margin-bottom:4px}
 .theme .papers ul{list-style:none}
@@ -190,7 +210,9 @@ section h2{font-size:clamp(2.4rem,4.6vw,3.4rem);margin-bottom:28px}
 .media .placeholder svg{width:30px;height:30px;color:var(--accent);opacity:.7}
 .media figcaption{font-size:.88rem;font-style:italic;color:var(--muted);margin-top:12px;line-height:1.5}
 
-.methods{margin-top:100px;padding-top:28px;border-top:1px solid var(--line);max-width:70ch;color:var(--muted);font-size:1rem}
+.methods{margin-top:100px;padding-top:34px;border-top:1px solid var(--line);max-width:70ch}
+.methods h3{font-size:clamp(1.9rem,3vw,2.5rem);margin-bottom:16px}
+.methods p+p{margin-top:1em}
 
 /* Publications */
 .filters{display:flex;flex-wrap:wrap;gap:6px 22px;margin-bottom:34px;font-family:var(--ui);font-size:.88rem}
@@ -219,14 +241,21 @@ section h2{font-size:clamp(2.4rem,4.6vw,3.4rem);margin-bottom:28px}
 .press a.title:hover{color:var(--accent)}
 
 /* Thesis */
-.thesis{max-width:760px}
+.thesis{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:center;max-width:900px}
+.thesis-cover{display:block;border:0;border-radius:6px;overflow:hidden;
+  box-shadow:0 0 0 1px var(--line),0 26px 50px -24px rgba(20,90,130,.55);
+  transform:rotate(-2deg);transition:transform .35s ease,box-shadow .35s ease}
+.thesis-cover:hover{transform:rotate(0) translateY(-4px);box-shadow:0 0 0 1px var(--line),0 34px 60px -24px rgba(20,90,130,.6)}
+.thesis-cover img{width:100%;height:auto}
+.thesis .more{font-family:var(--ui);font-size:.95rem;font-weight:500;display:inline-block;margin-top:18px}
 .thesis .title{font-family:var(--head);font-size:clamp(1.7rem,3vw,2.3rem);color:var(--ink);line-height:1.2;font-style:italic}
 .thesis .where{font-family:var(--ui);font-size:.88rem;color:var(--muted);margin:10px 0 22px}
 .thesis blockquote{border-left:2px solid var(--accent);padding-left:18px;font-style:italic;margin-bottom:20px}
 
 /* Contact */
 .contact{max-width:760px}
-.contact .mail{font-family:var(--head);font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--ink);border-bottom:1px solid var(--line);display:inline-block;margin:6px 0 18px}
+.contact .mail-line{margin:18px 0 14px;font-family:var(--ui);font-size:.9rem;color:var(--muted)}
+.contact .mail{font-family:var(--head);font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--ink);border-bottom:1px solid var(--line);margin-left:6px}
 .contact .mail:hover{color:var(--accent);border-color:var(--accent)}
 .contact address{font-style:normal;color:var(--muted);font-size:.98rem;margin-bottom:18px}
 .contact .elsewhere{font-size:.98rem}
@@ -235,7 +264,7 @@ footer{padding:50px 0 60px;font-family:var(--ui);font-size:.8rem;color:var(--mut
 footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:24px}
 
 /* body paragraphs fill the full width (justified); hyphenation avoids big gaps between words */
-.about-body p,.intro,.theme p,.methods,.thesis p:not(.title):not(.where),.contact > p{
+.about-body p,.intro,.span-note,.theme p,.methods,.thesis p:not(.title):not(.where),.contact > p:not(.mail-line){
   text-align:justify;hyphens:auto;-webkit-hyphens:auto;
 }
 
@@ -250,6 +279,9 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   .theme{grid-template-columns:1fr;gap:28px;margin-bottom:80px}
   .theme .media,.theme:nth-child(even) .media{order:-1}   /* figure on top on small screens */
   .scales{grid-template-columns:repeat(2,1fr)}
+  .directions{grid-template-columns:1fr}
+  .thesis{grid-template-columns:1fr;gap:30px}
+  .thesis-cover{max-width:200px}
   .scales > div{border-left:0;padding-left:0;border-bottom:1px solid var(--line)}
   .scales > div:last-child{border-bottom:0}
   .hero .container{justify-content:center}
@@ -320,6 +352,7 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <h1>Sanjay Shukla, PhD</h1>
       <p class="role">Postdoctoral researcher</p>
       <p class="place">Applied Physics &amp; Science Education<br>Eindhoven University of Technology</p>
+      <p class="interests"><span>Research interests:</span> Turbulence, complex fluids, quantum fluids, vortices, and nonlinear dynamics.</p>
       <hr>
       <div class="socials">
         <a href="mailto:s.shukla@tue.nl" aria-label="Email" title="Email">
@@ -349,25 +382,26 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     <h2 class="reveal">About me</h2>
 
     <p class="about-lead reveal">
-      I’m a physicist who studies <em>how fluids swirl and break apart</em>, from vortices a nanometre wide
-      in superfluid helium to the insides of neutron stars.
+      I’m a physicist interested in <em>how fluids move, interact, and break apart</em>, from quantised vortices in
+      superfluid helium to the interiors of neutron stars and turbulent multiphase flows.
     </p>
 
     <div class="about-body">
       <div class="reveal">
         <p>
-          I’m currently a postdoc in the Department of Applied Physics and Science Education at
-          Eindhoven University of Technology, where I work with Federico Toschi on turbulence in complex fluids:
-          droplets, emulsions, and fluids with odd viscosity.
+          I am currently a postdoctoral researcher in the Department of Applied Physics and Science Education at
+          Eindhoven University of Technology, where I work with Federico Toschi. My current research focuses on the
+          dynamics of complex fluids, particularly droplet breakup, emulsions, and turbulence in fluids with odd viscosity.
         </p>
         <p>
-          Before coming to Eindhoven, I did my PhD at the Indian Institute of Science in Bangalore. My thesis was about
-          superfluids: quantum turbulence in liquid helium, superfluid neutron-star cores and the glitches they
-          cause in pulsars, and self-gravitating condensates that might describe dark matter.
+          Before joining TU Eindhoven, I completed my PhD in Physics at the Indian Institute of Science, Bangalore, in 2024.
+          My doctoral research explored quantum turbulence in superfluid helium, the dynamics of neutron-star superfluids
+          and pulsar glitches, and self-gravitating condensates as models of dark matter.
         </p>
         <p>
-          Most of my work comes down to writing down a model, running large simulations of it on supercomputers,
-          and then looking for the statistical patterns in the results.
+          Across these different systems, I am interested in understanding how vortices, instabilities, and nonlinear
+          interactions shape the dynamics and statistical properties of fluids. My research combines theoretical
+          modelling, numerical simulations, and statistical physics, with an emphasis on large-scale computational approaches.
         </p>
         <!-- A line about yourself outside work makes the page feel much more personal, e.g.
         <p>Outside physics, I enjoy ...</p>
@@ -375,12 +409,12 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       </div>
 
       <ul class="facts reveal">
-        <li><span class="when">Now</span><b>Postdoctoral researcher</b><br>TU Eindhoven, the Netherlands</li>
-        <li><span class="when">2024</span><b>PhD in Physics</b><br>Indian Institute of Science, Bangalore</li>
-        <!-- Add earlier steps here, e.g.
-        <li><span class="when">20XX</span><b>M.Sc. Physics</b><br>University name</li>
+        <li><span class="when">Current position</span><b>Postdoctoral Researcher</b><br>Eindhoven University of Technology, The Netherlands</li>
+        <li><span class="when">Education</span><b>PhD in Physics, 2024</b><br>Indian Institute of Science, Bangalore, India</li>
+        <!-- Add earlier degrees here, e.g.
+        <li><span class="when">Education</span><b>M.Sc. Physics, 20XX</b><br>University name</li>
         -->
-        <li><span class="when">Interests</span>Statistical physics, turbulence, astrophysical superfluids, multiphase flows</li>
+        <li><span class="when">Research interests</span>Turbulence and nonlinear dynamics · Quantum and classical fluids · Vortices and instabilities · Multiphase flows · Astrophysical superfluids</li>
       </ul>
     </div>
   </div>
@@ -390,9 +424,31 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 <section id="research">
   <div class="container">
     <h2 class="reveal">Research</h2>
-    <p class="intro reveal">
-      What keeps pulling me in is that vortices, condensates and turbulent cascades turn up in very
-      different places, and often the same equations describe all of them. These are the problems I’ve worked on so far.
+    <p class="tagline reveal">Vortices, turbulence, and nonlinear dynamics in quantum and classical fluids</p>
+    <div class="intro reveal">
+      <p>
+        My research explores the dynamics of complex fluid systems across a wide range of physical scales, from quantum
+        fluids at ultralow temperatures to classical multiphase flows and astrophysical condensates.
+      </p>
+      <p>
+        I am particularly interested in how vortices, instabilities, and nonlinear interactions govern the evolution and
+        statistical properties of these systems. Using theoretical models, numerical simulations, and statistical analysis,
+        I investigate the physical mechanisms underlying turbulent and nonequilibrium phenomena.
+      </p>
+    </div>
+
+    <h3 class="subhead reveal">Research directions</h3>
+    <ol class="directions reveal">   <!-- each item jumps to its section below -->
+      <li><a href="#theme-4"><span class="n">1</span>Multiphase flows and complex fluid turbulence</a></li>
+      <li><a href="#theme-1"><span class="n">2</span>Quantum turbulence and superfluid dynamics</a></li>
+      <li><a href="#theme-2"><span class="n">3</span>Astrophysical superfluids: neutron stars and magnetars</a></li>
+      <li><a href="#theme-3"><span class="n">4</span>Self-gravitating condensates and dark matter</a></li>
+    </ol>
+
+    <p class="span-note reveal">
+      My research spans an extraordinary range of physical scales, from quantised vortex cores in superfluid helium to the
+      large-scale structure of dark-matter condensates. Despite the differences in these physical systems, vortices,
+      nonlinear interactions, and collective dynamics provide recurring themes throughout my work.
     </p>
 
     <div class="scales reveal">
@@ -416,22 +472,71 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 
     <div class="themes">
 
-      <!-- Theme 1 -->
-      <article class="theme reveal">
+      <!-- Theme: current postdoc work (shown first) -->
+      <article class="theme reveal" id="theme-4">
         <div>
-          <h3>Quantum turbulence in superfluid helium</h3>
+          <span class="now">Current research · TU Eindhoven</span>
+          <h3>Multiphase flows and complex fluid turbulence</h3>
           <p>
-            Below about 2&nbsp;K, liquid helium becomes a superfluid that flows without viscosity, and its
-            rotation is carried by quantised vortices. That makes its turbulence a problem spanning many scales at once. I use
-            the two-fluid HVBK model and the Gross–Pitaevskii equation to study its statistics, how small particles
-            get carried around in coflow and counterflow, and how a vibrating nanowire can catch and release a single vortex.
+            My current research at Eindhoven University of Technology focuses on the dynamics of complex fluids and multiphase turbulent flows. These systems involve interacting fluid interfaces, droplets, particles, and nonlinear flow structures, giving rise to a wide range of dynamical phenomena.
           </p>
-          <div class="papers">
-            <span>Related papers</span>
+          <p>
+            Working with Federico Toschi, I investigate problems such as liquid ligament breakup in the presence of solid particles, droplet dynamics, emulsions in turbulent flows, and the influence of odd viscosity on turbulent transport and energy transfer.
+          </p>
+          <p>
+            A central goal is to understand how interfacial dynamics, particle–fluid interactions, and non-dissipative transport mechanisms modify the behaviour of complex fluid systems.
+          </p>
+          <div class="topics">
+            <span>Research topics</span>
             <ul>
-              <li><a href="https://arxiv.org/abs/1905.01507" target="_blank" rel="noopener">Statistical properties of superfluid turbulence in ⁴He</a>, Phys. Rev. E (2023)</li>
-              <li><a href="https://arxiv.org/abs/2110.09801" target="_blank" rel="noopener">Inertial particles in superfluid turbulence</a>, Phys. Fluids (2023)</li>
-              <li><a href="https://arxiv.org/abs/2410.06650" target="_blank" rel="noopener">Capture and release of quantum vortices</a>, Phys. Rev. B (2025)</li>
+              <li>Droplet dynamics and breakup</li>
+              <li>Liquid ligament instability and pinch-off</li>
+              <li>Particle–fluid interactions</li>
+              <li>Emulsions and multiphase turbulence</li>
+              <li>Odd viscosity and nonlinear fluid dynamics</li>
+            </ul>
+          </div>
+          <div class="papers">
+            <span>Related publications</span>
+            <ul>
+              <li><a href="https://arxiv.org/abs/2605.19774" target="_blank" rel="noopener">Self-similar breakup of a liquid ligament with a solid particle</a> — arXiv (2026)</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="media">
+          <div class="frame">
+              <video src="lig.mov" autoplay muted loop playsinline></video>
+          </div>
+          <figcaption>Numerical investigation of liquid ligament breakup in the presence of a solid particle, highlighting the complex interfacial dynamics and self-similar behaviour during pinch-off.</figcaption>
+        </figure>
+      </article>
+
+      <!-- PhD work. To hide the small grey label above a theme, delete its <span class="now phd">…</span> line -->
+      <article class="theme reveal" id="theme-1">
+        <div>
+          <span class="now phd">PhD research · IISc Bangalore</span>
+          <h3>Quantum turbulence and superfluid dynamics</h3>
+          <p>
+            At temperatures below approximately 2&nbsp;K, liquid helium enters the superfluid state, where its rotation is carried by quantised vortices. The resulting quantum turbulence exhibits a rich interplay between discrete vortex structures and large-scale turbulent motion.
+          </p>
+          <p>
+            My research investigates the statistical properties and dynamics of quantum turbulence using the two-fluid Hall–<wbr>Vinen–<wbr>Bekharevich–<wbr>Khalatnikov (HVBK) model and the Gross–Pitaevskii equation. I have studied particle transport in superfluid coflow and counterflow, the statistical properties of turbulent vortex tangles, and the capture and release of individual quantum vortices by vibrating nanowires.
+          </p>
+          <div class="topics">
+            <span>Research topics</span>
+            <ul>
+              <li>Statistical properties of quantum turbulence</li>
+              <li>Particle transport in superfluid turbulence</li>
+              <li>Quantised vortex dynamics and trapping</li>
+              <li>Numerical modelling of superfluid systems</li>
+            </ul>
+          </div>
+          <div class="papers">
+            <span>Related publications</span>
+            <ul>
+              <li><a href="https://arxiv.org/abs/1905.01507" target="_blank" rel="noopener">Statistical properties of superfluid turbulence in ⁴He</a> — Physical Review E (2023)</li>
+              <li><a href="https://arxiv.org/abs/2110.09801" target="_blank" rel="noopener">Inertial particles in superfluid turbulence</a> — Physics of Fluids (2023)</li>
+              <li><a href="https://arxiv.org/abs/2410.06650" target="_blank" rel="noopener">Capture and release of quantum vortices</a> — Physical Review B (2025)</li>
             </ul>
           </div>
         </div>
@@ -443,22 +548,31 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
         </figure>
       </article>
 
-      <!-- Theme 2 -->
-      <article class="theme reveal">
+      <article class="theme reveal" id="theme-2">
         <div>
-          <h3>Neutron stars, pulsar glitches and magnetars</h3>
+          <span class="now phd">PhD research · IISc Bangalore</span>
+          <h3>Astrophysical superfluids: neutron stars and magnetars</h3>
           <p>
-            Pulsars spin with astonishing regularity, until they suddenly speed up, an event called a “glitch”.
-            Their cores are thought to contain a neutron superfluid and a proton superconductor. With a minimal
-            Gross–Pitaevskii–Poisson model, we showed how vortices and magnetic flux tubes interacting inside the star can
-            produce glitches. I am now extending the model to magnetars, following how their magnetic fields evolve and
-            what gravitational waves they emit.
+            Neutron stars provide a fascinating setting in which quantum fluids and superconducting matter operate under extreme conditions. Their interiors are believed to contain neutron superfluids and proton superconductors, where the interactions between quantised vortices and magnetic flux tubes can influence stellar rotation and magnetic-field evolution.
           </p>
-          <div class="papers">
-            <span>Related papers</span>
+          <p>
+            My research investigates the dynamics of these astrophysical superfluids, with particular emphasis on pulsar glitches and magnetar evolution. Using Gross–Pitaevskii–Poisson-based models, I have explored how vortex–flux-tube interactions can produce sudden changes in stellar rotation. My ongoing work extends these ideas to magnetars, investigating their magnetic-field evolution and possible gravitational-wave signatures.
+          </p>
+          <div class="topics">
+            <span>Research topics</span>
             <ul>
-              <li><a href="https://arxiv.org/abs/2405.12127" target="_blank" rel="noopener">A minimal model for pulsar glitches</a>, Phys. Rev. D (2024), covered by New Scientist</li>
-              <li><a href="https://arxiv.org/abs/2503.12064" target="_blank" rel="noopener">Dynamics of superfluid–superconducting magnetars</a>, arXiv (2025)</li>
+              <li>Neutron-star superfluidity</li>
+              <li>Quantised vortices and magnetic flux tubes</li>
+              <li>Pulsar glitches</li>
+              <li>Magnetar dynamics and magnetic-field evolution</li>
+              <li>Gravitational-wave signatures of astrophysical superfluids</li>
+            </ul>
+          </div>
+          <div class="papers">
+            <span>Related publications</span>
+            <ul>
+              <li><a href="https://arxiv.org/abs/2405.12127" target="_blank" rel="noopener">A minimal model for pulsar glitches</a> — Physical Review D (2024)</li>
+              <li><a href="https://arxiv.org/abs/2503.12064" target="_blank" rel="noopener">Dynamics of superfluid–superconducting magnetars</a> — arXiv (2025)</li>
             </ul>
           </div>
         </div>
@@ -466,27 +580,37 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
           <div class="frame">
               <img src="neutron_star.jpeg" alt="Vortices in a neutron star">
           </div>
-          <figcaption>Caption: describe the figure and cite the paper it comes from.</figcaption>
+          <figcaption>Schematic illustration of quantised vortices and magnetic flux tubes in the interior of a neutron star. The interactions between these structures can influence stellar rotation and trigger pulsar glitches.</figcaption>
         </figure>
       </article>
 
-      <!-- Theme 3 -->
-      <article class="theme reveal">
+      <article class="theme reveal" id="theme-3">
         <div>
+          <span class="now phd">PhD research · IISc Bangalore</span>
           <h3>Self-gravitating condensates and dark matter</h3>
           <p>
-            One idea for dark matter is that it is made of very light bosons that form a Bose–Einstein
-            condensate on galactic scales. I run large 3D simulations of the Gross–Pitaevskii–Poisson equation to see
-            what such a condensate does: how it collapses under gravity, how temperature changes that, and how turbulence
-            and large-scale structures develop inside it.
+            Ultralight bosonic dark matter provides an intriguing connection between quantum mechanics and cosmology. In these models, dark matter can be described as a large-scale self-gravitating Bose–Einstein condensate, whose dynamics are governed by the interplay between quantum pressure, gravity, and nonlinear interactions.
           </p>
-          <div class="papers">
-            <span>Related papers</span>
+          <p>
+            My research investigates the dynamics of these self-gravitating condensates using the Gross–Pitaevskii–Poisson framework. Through large-scale three-dimensional numerical simulations, I have studied gravitational collapse, phase transitions, the effects of temperature, and the emergence of turbulence and large-scale structures in bosonic and axionic condensates.
+          </p>
+          <div class="topics">
+            <span>Research topics</span>
             <ul>
-              <li><a href="https://arxiv.org/abs/2311.01769" target="_blank" rel="noopener">Phase transitions in collapsed axionic condensates</a>, Phys. Rev. D (2024)</li>
-              <li><a href="https://arxiv.org/abs/2502.20006" target="_blank" rel="noopener">Turbulence and large-scale structures in self-gravitating superfluids</a>, Phys. Rev. Fluids (2025)</li>
-              <li>Self-gravitating superfluids: the Gross–Pitaevskii–Poisson framework, Phil. Trans. R. Soc. A (2026)</li>
-              <li><a href="https://doi.org/10.1103/PhysRevD.113.123516" target="_blank" rel="noopener">Vortex retention in bosonic and axionic condensates</a>, Phys. Rev. D (2026)</li>
+              <li>Gross–Pitaevskii–Poisson dynamics</li>
+              <li>Self-gravitating Bose–Einstein condensates</li>
+              <li>Gravitational collapse and phase transitions</li>
+              <li>Turbulence and large-scale structures</li>
+              <li>Ultralight bosonic and axionic dark matter</li>
+            </ul>
+          </div>
+          <div class="papers">
+            <span>Related publications</span>
+            <ul>
+              <li><a href="https://arxiv.org/abs/2311.01769" target="_blank" rel="noopener">Phase transitions in collapsed axionic condensates</a> — Physical Review D (2024)</li>
+              <li><a href="https://arxiv.org/abs/2502.20006" target="_blank" rel="noopener">Turbulence and large-scale structures in self-gravitating superfluids</a> — Physical Review Fluids (2025)</li>
+              <li>Self-gravitating superfluids: the Gross–Pitaevskii–Poisson framework — Philosophical Transactions of the Royal Society A (2026)</li>
+              <li><a href="https://doi.org/10.1103/PhysRevD.113.123516" target="_blank" rel="noopener">Vortex retention in bosonic and axionic condensates</a> — Physical Review D (2026)</li>
             </ul>
           </div>
         </div>
@@ -494,42 +618,29 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
           <div class="frame">
               <video src="DMH_wave.mp4" autoplay muted loop playsinline aria-label="A giant matter wave oscillating across the dark-matter halo around the Milky Way"></video>
           </div>
-          <figcaption>Caption: describe the figure and cite the paper it comes from.</figcaption>
-        </figure>
-      </article>
-
-      <!-- Theme 4 -->
-      <article class="theme reveal">
-        <div>
-          <span class="now">What I’m working on now</span>
-          <h3>Droplets, emulsions and odd viscosity</h3>
-          <p>
-            In Eindhoven I’ve moved to classical fluids, though the questions are similar. How does a liquid
-            thread pinch off into drops, and what changes if a solid particle is sitting inside it? How do emulsions form
-            in turbulence? And what happens to the turbulent cascade when a fluid has <em>odd viscosity</em>, a kind of
-            viscosity that doesn’t dissipate energy?
-          </p>
-          <div class="papers">
-            <span>Related papers</span>
-            <ul>
-              <li><a href="https://arxiv.org/abs/2605.19774" target="_blank" rel="noopener">Self-similar breakup of a liquid ligament with a solid particle</a>, arXiv (2026)</li>
-            </ul>
-          </div>
-        </div>
-        <figure class="media">
-          <div class="frame">
-              <video src="lig.mov" autoplay muted loop playsinline></video>
-          </div>
-          <figcaption>Caption: describe the figure and cite the paper it comes from.</figcaption>
+          <figcaption>Numerical simulation of a self-gravitating condensate, illustrating the formation and evolution of large-scale structures under the combined influence of quantum dynamics and gravity.</figcaption>
         </figure>
       </article>
 
     </div>
 
-    <p class="methods reveal">
-      <strong>How I work.</strong> Nearly all of this relies on direct numerical simulations, mostly
-      pseudo-spectral codes parallelised with MPI and OpenMP and run on high-performance computing clusters.
-    </p>
+    <div class="methods reveal">
+      <h3>How I work</h3>
+      <p>
+        My research combines theoretical modelling, numerical simulations, and statistical analysis to investigate
+        nonlinear fluid phenomena.
+      </p>
+      <p>
+        I develop and implement numerical models for different physical systems, using methods ranging from spectral
+        simulations of quantum fluids to direct numerical simulations of classical multiphase flows. These simulations
+        are performed using parallel computing techniques, including MPI and OpenMP, and run on high-performance
+        computing clusters.
+      </p>
+      <p>
+        I am particularly interested in connecting the microscopic dynamics of individual structures, such as vortices,
+        droplets, and interfaces, to the macroscopic statistical behaviour of complex fluid systems.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -561,7 +672,8 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <span class="tag">In the press</span>
       <div>
         <a class="title" href="https://www.newscientist.com/article/2433690-glitching-radio-waves-from-dead-stars-explained-by-swirling-superfluid/" target="_blank" rel="noopener">“Glitching radio waves from dead stars explained by swirling superfluid”</a>
-        <p>New Scientist interviewed me about our model of pulsar glitches.</p>
+        <p>Our work on pulsar glitches was featured in New Scientist.
+          <a href="https://arxiv.org/abs/2405.12127" target="_blank" rel="noopener">Read the paper</a>.</p>
       </div>
     </div>
 
@@ -581,12 +693,18 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   <div class="container">
     <h2 class="reveal">PhD thesis</h2>
     <div class="thesis reveal">
-      <p class="title">Studies of Models of Superfluids from Nanometres to Astrophysical Scales</p>
-      <p class="where">Indian Institute of Science, Bangalore · 2024</p>
-      <blockquote>“Superfluids constitute a fascinating class of fluids characterised by their vanishing molecular viscosity.”</blockquote>
-      <p>The thesis ties together the work above on helium turbulence, quantum vortices, neutron stars and self-gravitating
-        condensates. <!-- Replace the link below with "thesis.pdf" if you put the PDF in your folder -->
-        <a href="https://sites.google.com/view/sanjay-shukla-physics/thesis" target="_blank" rel="noopener">Read the thesis</a>.</p>
+      <!-- Cover image: put your cover in the website folder as thesis_cover.jpg (or change the file name below).
+           Both the cover and the link open thesis.html in a new tab. -->
+      <a class="thesis-cover" href="thesis.html" target="_blank" rel="noopener" aria-label="Open my PhD thesis page">
+        <img src="thesis_cover.jpeg" alt="Cover of my PhD thesis">
+      </a>
+      <div>
+        <p class="title">Studies of Models of Superfluids from Nanometres to Astrophysical Scales</p>
+        <p class="where">Indian Institute of Science, Bangalore · 2024</p>
+        <p>The work combined theoretical modelling and numerical simulations to investigate the dynamics, stability, and
+          statistical properties of these systems.</p>
+        <a class="more" href="thesis.html" target="_blank" rel="noopener">Read my PhD thesis →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -595,14 +713,15 @@ footer .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 <section id="contact">
   <div class="container"><div class="contact reveal">
     <h2>Get in touch</h2>
-    <p>Email is the easiest way to reach me. I’m always happy to talk about turbulence, superfluids or possible collaborations.</p>
-    <a class="mail" href="mailto:s.shukla@tue.nl">s.shukla@tue.nl</a>
-    <address>Department of Applied Physics and Science Education<br>Eindhoven University of Technology, Eindhoven, the Netherlands</address>
+    <p>I am always happy to discuss research collaborations, scientific questions, and opportunities related to
+      turbulence, quantum and classical fluids, and nonlinear dynamics.</p>
+    <p class="mail-line">Email: <a class="mail" href="mailto:s.shukla@tue.nl">s.shukla@tue.nl</a></p>
+    <address>Department of Applied Physics and Science Education<br>Eindhoven University of Technology<br>Eindhoven, The Netherlands</address>
     <p class="elsewhere">
-      Also on
+      You can also find my work on
       <a href="https://scholar.google.com/citations?user=sfmY9f4AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>,
       <a href="https://www.linkedin.com/in/sanjay-shukla-PhD-1479aa135/" target="_blank" rel="noopener">LinkedIn</a>,
-      <a href="https://x.com/shukla_ssanjay" target="_blank" rel="noopener">X</a> and
+      <a href="https://x.com/shukla_ssanjay" target="_blank" rel="noopener">X</a>, and
       <a href="https://www.researchgate.net/profile/Sanjay-Shukla-12" target="_blank" rel="noopener">ResearchGate</a>.
     </p>
   </div></div>
